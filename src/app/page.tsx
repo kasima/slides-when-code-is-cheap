@@ -126,19 +126,32 @@ const slides = [
   },
   {
     title: "Code Gets Cheap",
-    content: [
-      "The cost of a line of code is approaching $0.",
-      "Big Tech are caches of expensive code.",
-      "Analogy: What happened to radio?"
-    ],
-    contentClasses: "list-disc pl-6 space-y-3"
+    content: (
+      <div className="flex gap-8 items-center">
+        <div className="w-[200px] relative h-[356px] rounded-lg overflow-hidden glass-effect">
+          <Image 
+            src="/images/radio.jpg" 
+            alt="Radio analogy" 
+            fill
+            className="object-contain"
+          />
+        </div>
+        <div className="flex-1">
+          <ul className="list-disc pl-6 space-y-3">
+            <li className="text-[var(--text-primary)]">The cost of a line of code is approaching $0.</li>
+            <li className="text-[var(--text-primary)]">Big Tech are caches of expensive, shared code.</li>
+            <li className="text-[var(--text-primary)]">Analogy: What happened to radio?</li>
+          </ul>
+        </div>
+      </div>
+    ),
   }, 
   {
     title: "Opportunities For You",
     content: [
       "Teams don't need to be huge anymore.",
       "Competitive advantage shifts from capital to clarity, values, vision.",
-      "There's about to be a lot of disruption.",
+      "There's about to be a lot of disruption. New abstractions, new ways of working, new everything.",
       "Code is cheap. Insight is rare."
     ],
     contentClasses: "list-disc pl-6 space-y-3",

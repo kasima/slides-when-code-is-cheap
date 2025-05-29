@@ -327,9 +327,9 @@ body {
 .js-typewriter-output::after {
   content: '';
   position: absolute;
-  right: -8px;
+  right: -14px;
   top: 0;
-  height: 1em;
+  height: 1.1em;
   width: 0.15em;
   background: linear-gradient(120deg, #9ece6a 0%, #e0af68 100%);
   animation: blink-caret 1.5s step-end infinite;
