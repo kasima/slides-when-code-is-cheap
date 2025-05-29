@@ -92,7 +92,7 @@ const Typewriter: React.FC<TypewriterProps> = ({ text, speed = 50, className = "
 
 const slides = [
   {
-    title: "When An LoC is Cheap",
+    title: "When an LoC is Cheap",
     content: [
       "What still matters in software?",
       "Kasima Tharnpipitchai",
@@ -127,8 +127,8 @@ const slides = [
   {
     title: "Code Gets Cheap",
     content: [
-      "The cost of software production is falling due to AI.",
-      "Big Tech are just caches of code.",
+      "The cost of a line of code is approaching $0.",
+      "Big Tech are caches of expensive code.",
       "Analogy: What happened to radio?"
     ],
     contentClasses: "list-disc pl-6 space-y-3"
@@ -138,15 +138,17 @@ const slides = [
     content: [
       "Teams don't need to be huge anymore.",
       "Competitive advantage shifts from capital to clarity, values, vision.",
+      "There's about to be a lot of disruption.",
       "Code is cheap. Insight is rare."
     ],
     contentClasses: "list-disc pl-6 space-y-3",
-    itemClasses: ["text-[var(--text-primary)]", "text-[var(--text-primary)]", "text-[var(--text-primary)] font-semibold text-[var(--accent)]"]
+    itemClasses: ["text-[var(--text-primary)]", "text-[var(--text-primary)]", "text-[var(--text-primary)]", "text-[var(--text-primary)] font-semibold text-[var(--accent)]"]
   },
   {
     title: "What Still Matters",
     content: (
       <ul className="list-disc pl-6 space-y-4">
+        <li className="text-[var(--text-primary)]"><b className="text-[var(--primary)] dark:text-[var(--accent)]">Critical Thinking:</b> AI output doesn&apos;t make senese a lot of the time.</li>
         <li className="text-[var(--text-primary)]"><b className="text-[var(--primary)] dark:text-[var(--accent)]">Empathy:</b> Understanding real user needs, not just requirements.</li>
         <li className="text-[var(--text-primary)]"><b className="text-[var(--primary)] dark:text-[var(--accent)]">Creativity:</b> How to solve problems will require more than prompts.</li>
         <li className="text-[var(--text-primary)]"><b className="text-[var(--primary)] dark:text-[var(--accent)]">Taste:</b> The ability to recognize quality, simplicity, and what feels &lsquo;right.&rsquo;</li>
