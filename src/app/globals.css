@@ -1,19 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f0f2f5; /* Light grey background */
-  --foreground: #1a1a1a; /* Dark grey for text */
-  --primary: #007aff;    /* Vibrant blue for primary actions/accents */
-  --primary-dark: #005bb5; /* Darker blue for hover states */
-  /* Updated Classy Gradients - Light Mode */
-  --gradient-start: #d1e0ff; /* Very Pale Blue */
-  --gradient-end: #e5d9f2;   /* Pale Lilac */
-  --glass-bg: rgba(255, 255, 255, 0.85); /* Slightly less opaque glass */
-  --glass-border: rgba(255, 255, 255, 0.3);
-  --accent: #ff3b30;     /* Vibrant red for secondary accents */
-  --text-primary: #1c1c1e; /* Near black for high contrast text */
-  --text-secondary: #3a3a3c; /* Dark grey for secondary text */
-  --text-light: #8e8e93;   /* Lighter grey for less emphasis text */
+  --background: #0a0a1a; /* Deep midnight blue background */
+  --foreground: #e0e0ff; /* Soft blue-white text */
+  --primary: #7aa2f7;    /* Bright blue */
+  --primary-dark: #5d8af0; /* Darker blue for hover states */
+  /* Updated Midnight Theme Colors */
+  --gradient-start: #0a0a1a; /* Deep midnight blue */
+  --gradient-end: #1a1a2e;   /* Slightly lighter midnight blue */
+  --glass-bg: rgba(10, 10, 26, 0.85); /* Dark glass effect */
+  --glass-border: rgba(122, 162, 247, 0.1);
+  --accent: #bb9af7;     /* Soft purple */
+  --text-primary: #e0e0ff; /* Soft blue-white */
+  --text-secondary: #7dcfff; /* Bright cyan */
+  --text-light: #9ece6a;   /* Soft green */
 }
 
 @theme inline {
@@ -25,23 +25,22 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #1c1c1e; /* Very dark grey, almost black */
-    --foreground: #f2f2f7; /* Light grey for text */
-    /* Updated Classy Gradients - Dark Mode */
-    --gradient-start: #34495e; /* Wet Asphalt - dark desaturated blue */
-    --gradient-end: #2c3e50;   /* Midnight Blue - dark charcoal blue */
-    --glass-bg: rgba(28, 28, 30, 0.85); /* Dark, slightly less opaque glass */
-    --glass-border: rgba(255, 255, 255, 0.15);
-    --text-primary: #ffffff;
-    --text-secondary: #e5e5ea;
-    --text-light: #c7c7cc;
+    --background: #0a0a1a;
+    --foreground: #e0e0ff;
+    --gradient-start: #0a0a1a;
+    --gradient-end: #1a1a2e;
+    --glass-bg: rgba(10, 10, 26, 0.85);
+    --glass-border: rgba(122, 162, 247, 0.1);
+    --text-primary: #e0e0ff;
+    --text-secondary: #7dcfff;
+    --text-light: #9ece6a;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: 'SF Pro Display', 'Inter', system-ui, -apple-system, sans-serif; /* Modern, stylish font */
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
 }
 
 @keyframes gradient {
@@ -88,8 +87,8 @@ body {
 
 .bg-grid-pattern {
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    linear-gradient(to right, rgba(122, 162, 247, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(122, 162, 247, 0.03) 1px, transparent 1px);
   background-size: 30px 30px;
 }
 
@@ -97,8 +96,8 @@ body {
   position: absolute;
   border-radius: 50%;
   background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end));
-  opacity: 0.15; /* More visible */
-  filter: blur(50px); /* More blur for a softer, larger glow */
+  opacity: 0.08;
+  filter: blur(60px);
 }
 
 .circle-1 {
@@ -149,7 +148,7 @@ body {
 
 .progress-bar {
   height: 4px;
-  background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+  background: linear-gradient(90deg, var(--primary), var(--accent));
   transition: width 0.3s ease;
 }
 
@@ -157,14 +156,14 @@ body {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--gradient-start);
-  opacity: 0.3;
+  background: var(--primary);
+  opacity: 0.2;
   transition: all 0.3s ease;
 }
 
 .slide-indicator.active {
   opacity: 1;
-  transform: scale(1.2);
+  background: var(--accent);
 }
 
 .button-hover {
@@ -173,14 +172,14 @@ body {
 
 .button-hover:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(122, 162, 247, 0.15);
 }
 
 .glass-effect {
   background: var(--glass-bg);
-  backdrop-filter: blur(12px); /* Slightly more blur */
+  backdrop-filter: blur(12px);
   border: 1px solid var(--glass-border);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15); /* More pronounced shadow */
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
 }
 
 .dark .glass-effect {
@@ -280,8 +279,8 @@ body {
   position: absolute;
   width: 200px; /* Match .hypercube-scene size */
   height: 200px;
-  border: 2px solid rgba(255, 255, 255, 0.7); /* Translucent white wireframe */
-  background-color: rgba(255, 255, 255, 0.05); /* Very subtle fill */
+  border: 2px solid rgba(122, 162, 247, 0.2); /* Bright blue with transparency */
+  background-color: rgba(122, 162, 247, 0.05);
   opacity: 0.8;
   box-sizing: border-box;
 }
@@ -316,6 +315,13 @@ body {
 .js-typewriter-output {
   position: relative;
   display: inline;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  background: linear-gradient(120deg, #9ece6a 0%, #e0af68 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 20px rgba(158, 206, 106, 0.2);
+  filter: drop-shadow(0 0 8px rgba(158, 206, 106, 0.3));
 }
 
 .js-typewriter-output::after {
@@ -325,9 +331,10 @@ body {
   top: 0;
   height: 1em;
   width: 0.15em;
-  background-color: var(--text-primary);
+  background: linear-gradient(120deg, #9ece6a 0%, #e0af68 100%);
   animation: blink-caret 1.5s step-end infinite;
   vertical-align: text-bottom;
+  box-shadow: 0 0 8px rgba(158, 206, 106, 0.3);
 }
 
 @keyframes blink-caret {
@@ -379,4 +386,14 @@ body {
   /* Ensure it takes up space */
   height: 1.2em; /* Approximate line height */
   display: block; /* Or inline-block depending on context */
+}
+
+/* Title styling */
+.syntax-highlight-title {
+  background: linear-gradient(120deg, #9ece6a 0%, #e0af68 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 20px rgba(158, 206, 106, 0.2);
+  filter: drop-shadow(0 0 8px rgba(158, 206, 106, 0.3));
 }

@@ -91,9 +91,9 @@ const Typewriter: React.FC<TypewriterProps> = ({ text, speed = 50, className = "
 
 const slides = [
   {
-    title: "When Code Is Cheap: What Still Matters in Software",
+    title: "When An LoC is Cheap",
     content: [
-      "What happens when code is no longer the bottleneck?",
+      "What still matters in software?",
       "Kasima Tharnpipitchai"
     ],
     contentClasses: [
@@ -278,7 +278,7 @@ export default function Slides() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="text-4xl md:text-5xl font-bold mb-8 text-[var(--text-primary)] drop-shadow-md"
+              className="text-4xl md:text-5xl font-bold mb-8 syntax-highlight-title"
             >
               <Typewriter
                 text={currentSlide.title}
