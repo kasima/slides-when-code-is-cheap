@@ -148,14 +148,26 @@ const slides = [
   }, 
   {
     title: "Opportunities For You",
-    content: [
-      "Teams don't need to be huge anymore.",
-      "Competitive advantage shifts from capital to clarity, values, vision.",
-      "There's about to be a lot of disruption. New abstractions, new ways of working, new everything.",
-      "Code is cheap. Insight is rare."
-    ],
-    contentClasses: "list-disc pl-6 space-y-3",
-    itemClasses: ["text-[var(--text-primary)]", "text-[var(--text-primary)]", "text-[var(--text-primary)]", "text-[var(--text-primary)] font-semibold text-[var(--accent)]"]
+    content: (
+      <div className="flex gap-8 items-center">
+        <div className="flex-1">
+          <ul className="list-disc pl-6 space-y-3">
+            <li className="text-[var(--text-primary)]">Teams don&apos;t need to be huge anymore.</li>
+            <li className="text-[var(--text-primary)]">Competitive advantage shifts from capital to clarity, values, vision.</li>
+            <li className="text-[var(--text-primary)]">There&apos;s about to be a lot of disruption. New abstractions, new ways of working, new everything.</li>
+            <li className="text-[var(--text-primary)] font-semibold text-[var(--accent)]">Code is cheap. Insight is rare.</li>
+          </ul>
+        </div>
+        <div className="w-[345px] relative h-[252px] rounded-lg overflow-hidden glass-effect">
+          <Image 
+            src="/images/collapse.gif" 
+            alt="Collapse of complexity" 
+            fill
+            className="object-contain"
+          />
+        </div>
+      </div>
+    ),
   },
   {
     title: "What Still Matters",
@@ -171,11 +183,24 @@ const slides = [
   },
   {
     title: "Keep Shipping 🚢",
-    content: [
-      "Software is no longer limited by ability — only by intention.",
-      "In a world where anyone can build anything, what you choose to build says everything.",
-    ],
-    contentClasses: ["text-[var(--text-primary)] text-lg", "mt-4 text-[var(--text-primary)] text-lg", "mt-8 font-bold text-3xl text-[var(--primary)] dark:text-[var(--accent)] drop-shadow-md"]
+    content: (
+      <div className="flex gap-8 items-center">
+        <div className="w-[300px] relative h-[532px] rounded-lg overflow-hidden glass-effect">
+          <Image 
+            src="/images/shipping.jpg" 
+            alt="Keep shipping" 
+            fill
+            className="object-contain"
+          />
+        </div>
+        <div className="flex-1">
+          <div className="space-y-4">
+            <p className="text-[var(--text-primary)] text-lg">Software is no longer limited by ability — only by intention.</p>
+            <p className="text-[var(--text-primary)] text-lg">In a world where anyone can build anything, what you choose to build says everything.</p>
+          </div>
+        </div>
+      </div>
+    ),
   },
 ];
 
