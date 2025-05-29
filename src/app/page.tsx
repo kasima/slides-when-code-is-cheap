@@ -94,63 +94,69 @@ const slides = [
     title: "When An LoC is Cheap",
     content: [
       "What still matters in software?",
-      "Kasima Tharnpipitchai"
+      "Kasima Tharnpipitchai",
+      "Head of AI Strategy, SCB 10X",
+      "Cursor/SCB 10X Meetup – 2025-05-29"
     ],
     contentClasses: [
-      "text-3xl md:text-4xl font-bold mt-8 text-[var(--text-primary)] drop-shadow-lg",
-      "mt-6 text-xl text-[var(--text-secondary)] opacity-90 drop-shadow"
+      "text-2xl md:text-3xl font-bold mt-8 text-[var(--text-primary)] drop-shadow-lg",
+      "mt-6 text-lg text-[var(--text-secondary)] opacity-90 drop-shadow",
+      "mt-2 text-sm text-[var(--text-secondary)] opacity-80",
+      "mt-1 text-sm text-[var(--text-secondary)] opacity-70"
     ]
   },
   {
     title: "I Was Wrong.",
-    content: [
-        "Anecdote:",
-        "Tell the GitHub story — the moment you realized Copilot wasn&apos;t just autocomplete.",
-        "Establish the before and after: from code being expensive to code becoming cheap."
-    ],
-    contentClasses: [
-        "text-xl text-[var(--text-primary)] font-semibold",
-        "mt-4 text-[var(--text-secondary)]",
-        "mt-4 text-[var(--text-secondary)]"
-    ]
-  },
-  {
-    title: "The Shift: AI and the Cheapening of Code",
-    content: [
-      "The cost of software production is falling due to AI.",
-      "Code is becoming commoditized — like music, photography, video editing.",
-      "Analogy: What happened to Blockbuster, record labels, ad agencies?"
-    ],
-    contentClasses: "list-disc pl-6 space-y-3"
-  },
-  {
-    title: "What Still Matters: The Human Stack",
     content: (
-      <ul className="list-disc pl-6 space-y-4">
-        <li className="text-[var(--text-primary)]"><b className="text-[var(--primary)] dark:text-[var(--accent)]">Empathy:</b> Understanding real user needs, not just requirements.<br/><span className="text-[var(--text-secondary)] dark:text-[var(--text-light)] italic text-sm">&quot;You can ask an LLM to write 100 features. Only humans know which ones matter.&quot;</span></li>
-        <li className="text-[var(--text-primary)]"><b className="text-[var(--primary)] dark:text-[var(--accent)]">Purpose &amp; Values:</b> What you build &mdash; and why &mdash; matters more than how fast you can build it.</li>
-        <li className="text-[var(--text-primary)]"><b className="text-[var(--primary)] dark:text-[var(--accent)]">Taste:</b> The ability to recognize quality, simplicity, and what feels &lsquo;right.&rsquo; <br/><span className="text-[var(--text-secondary)] dark:text-[var(--text-light)] italic text-sm">&quot;AI can generate a design. It takes taste to reject the first draft.&quot;</span></li>
-        <li className="text-[var(--text-primary)]"><b className="text-[var(--primary)] dark:text-[var(--accent)]">Creativity:</b> The next big idea won&apos;t be a prompt. It&apos;ll be a perspective shift.</li>
-        <li className="text-[var(--text-primary)]"><b className="text-[var(--primary)] dark:text-[var(--accent)]">Judgment &amp; Problem Framing:</b> AI is great at solving well-defined problems. But it won&apos;t tell you which problem to solve.</li>
-      </ul>
+      <div className="flex gap-8 items-center">
+        <div className="w-[300px] relative h-[436px] rounded-lg overflow-hidden glass-effect">
+          <img 
+            src="/images/ktgh.jpeg" 
+            alt="Don't be this guy in 2015" 
+            className="w-full h-full object-contain"
+          />
+        </div>
+        <div className="flex-1 text-xl text-[var(--text-primary)] font-semibold">
+          Don&apos;t be this guy in 2015
+        </div>
+      </div>
     ),
   },
   {
-    title: "Implications for Builders & Teams",
+    title: "Code Gets Cheap",
     content: [
-      "Teams don&apos;t need to be huge anymore.",
-      "Competitive advantage shifts from capital and headcount → to clarity, values, vision.",
+      "The cost of software production is falling due to AI.",
+      "Big Tech are just caches of code.",
+      "Analogy: What happened to radio?"
+    ],
+    contentClasses: "list-disc pl-6 space-y-3"
+  }, 
+  {
+    title: "Opportunities For You",
+    content: [
+      "Teams don't need to be huge anymore.",
+      "Competitive advantage shifts from capital to clarity, values, vision.",
       "Code is cheap. Insight is rare."
     ],
     contentClasses: "list-disc pl-6 space-y-3",
     itemClasses: ["text-[var(--text-primary)]", "text-[var(--text-primary)]", "text-[var(--text-primary)] font-semibold text-[var(--accent)]"]
   },
   {
-    title: "Closing: A Call to Build Wisely",
+    title: "What Still Matters",
+    content: (
+      <ul className="list-disc pl-6 space-y-4">
+        <li className="text-[var(--text-primary)]"><b className="text-[var(--primary)] dark:text-[var(--accent)]">Empathy:</b> Understanding real user needs, not just requirements.<br/><span className="text-[var(--text-secondary)] dark:text-[var(--text-light)] italic text-sm">&quot;You can ask an LLM to write 100 features. Only humans know which ones matter.&quot;</span></li>
+        <li className="text-[var(--text-primary)]"><b className="text-[var(--primary)] dark:text-[var(--accent)]">Purpose &amp; Values:</b> What you build &mdash; and why &mdash; matters more than how fast you can build it.</li>
+        <li className="text-[var(--text-primary)]"><b className="text-[var(--primary)] dark:text-[var(--accent)]">Creativity:</b> The next big idea won&apos;t be a prompt. It&apos;ll be a perspective shift.</li>
+        <li className="text-[var(--text-primary)]"><b className="text-[var(--primary)] dark:text-[var(--accent)]">Taste:</b> The ability to recognize quality, simplicity, and what feels &lsquo;right.&rsquo; <br/><span className="text-[var(--text-secondary)] dark:text-[var(--text-light)] italic text-sm">&quot;AI can generate a design. It takes taste to reject the first draft.&quot;</span></li>
+      </ul>
+    ),
+  },
+  {
+    title: "Keep Shipping 🚢",
     content: [
       "Software is no longer limited by ability — only by intention.",
       "In a world where anyone can build anything, what you choose to build says everything.",
-      "“What will you build, now that the only limit is your humanity?”"
     ],
     contentClasses: ["text-[var(--text-primary)] text-lg", "mt-4 text-[var(--text-primary)] text-lg", "mt-8 font-bold text-3xl text-[var(--primary)] dark:text-[var(--accent)] drop-shadow-md"]
   },

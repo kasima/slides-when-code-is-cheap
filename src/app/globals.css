@@ -361,6 +361,7 @@ body {
 
 /* Styling for the container of the text to be typed */
 .slide-content-prose {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
   /* Ensure there's enough space for text to appear */
 }
 
