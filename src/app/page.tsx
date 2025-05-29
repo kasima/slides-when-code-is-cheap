@@ -220,9 +220,9 @@ export default function Slides() {
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "ArrowRight" && index < slides.length - 1) {
+      if ((e.key === "ArrowRight" || e.key === "PageDown") && index < slides.length - 1) {
         goTo(index + 1);
-      } else if (e.key === "ArrowLeft" && index > 0) {
+      } else if ((e.key === "ArrowLeft" || e.key === "PageUp") && index > 0) {
         goTo(index - 1);
       }
     };
