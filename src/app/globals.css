@@ -1,26 +1,307 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f0f2f5; /* Light grey background */
+  --foreground: #1a1a1a; /* Dark grey for text */
+  --primary: #007aff;    /* Vibrant blue for primary actions/accents */
+  --primary-dark: #005bb5; /* Darker blue for hover states */
+  /* Updated Classy Gradients - Light Mode */
+  --gradient-start: #d1e0ff; /* Very Pale Blue */
+  --gradient-end: #e5d9f2;   /* Pale Lilac */
+  --glass-bg: rgba(255, 255, 255, 0.85); /* Slightly less opaque glass */
+  --glass-border: rgba(255, 255, 255, 0.3);
+  --accent: #ff3b30;     /* Vibrant red for secondary accents */
+  --text-primary: #1c1c1e; /* Near black for high contrast text */
+  --text-secondary: #3a3a3c; /* Dark grey for secondary text */
+  --text-light: #8e8e93;   /* Lighter grey for less emphasis text */
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-geist-sans); /* Keeping Geist for modernity */
   --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #1c1c1e; /* Very dark grey, almost black */
+    --foreground: #f2f2f7; /* Light grey for text */
+    /* Updated Classy Gradients - Dark Mode */
+    --gradient-start: #34495e; /* Wet Asphalt - dark desaturated blue */
+    --gradient-end: #2c3e50;   /* Midnight Blue - dark charcoal blue */
+    --glass-bg: rgba(28, 28, 30, 0.85); /* Dark, slightly less opaque glass */
+    --glass-border: rgba(255, 255, 255, 0.15);
+    --text-primary: #ffffff;
+    --text-secondary: #e5e5ea;
+    --text-light: #c7c7cc;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'SF Pro Display', 'Inter', system-ui, -apple-system, sans-serif; /* Modern, stylish font */
 }
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-30px) rotate(15deg); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 5px transparent; }
+  50% { transform: scale(1.08); box-shadow: 0 0 20px var(--accent), 0 0 30px var(--accent); }
+}
+
+@keyframes rotate-fast {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes drift-fade {
+  0% {
+    transform: translateY(0) translateX(0) scale(0.5);
+    opacity: 0;
+  }
+  20%, 80% {
+    opacity: 1;
+    transform: translateY(-50px) translateX(var(--particle-drift-x, 0px)) scale(1);
+  }
+  100% {
+    transform: translateY(-100px) translateX(calc(var(--particle-drift-x, 0px) * 2)) scale(0);
+    opacity: 0;
+  }
+}
+
+.gradient-bg {
+  background: linear-gradient(-45deg, var(--gradient-start), var(--gradient-end));
+  background-size: 400% 400%;
+  animation: gradient 20s ease infinite;
+}
+
+.bg-grid-pattern {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+
+.decorative-circle {
+  position: absolute;
+  border-radius: 50%;
+  background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end));
+  opacity: 0.15; /* More visible */
+  filter: blur(50px); /* More blur for a softer, larger glow */
+}
+
+.circle-1 {
+  width: 350px;
+  height: 350px;
+  top: -150px;
+  right: -150px;
+  animation: float 10s ease-in-out infinite, pulse-glow 5s ease-in-out infinite alternate;
+}
+
+.circle-2 {
+  width: 250px;
+  height: 250px;
+  bottom: -100px;
+  left: -100px;
+  animation: float 8s ease-in-out infinite reverse, pulse-glow 6s ease-in-out infinite alternate;
+}
+
+.circle-3 {
+  width: 200px;
+  height: 200px;
+  top: 40%;
+  right: 15%;
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+
+.slide-enter {
+  opacity: 0;
+  transform: translateY(20px) scale(0.95);
+}
+
+.slide-enter-active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition: opacity 500ms, transform 500ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slide-exit {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.slide-exit-active {
+  opacity: 0;
+  transform: translateY(-20px) scale(0.95);
+  transition: opacity 500ms, transform 500ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.progress-bar {
+  height: 4px;
+  background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+  transition: width 0.3s ease;
+}
+
+.slide-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gradient-start);
+  opacity: 0.3;
+  transition: all 0.3s ease;
+}
+
+.slide-indicator.active {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+.button-hover {
+  transition: all 0.2s ease;
+}
+
+.button-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.glass-effect {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px); /* Slightly more blur */
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15); /* More pronounced shadow */
+}
+
+.dark .glass-effect {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+}
+
+/* --- Animated Hypercube Styles --- */
+.hypercube-scene {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200px; /* Adjust size as needed */
+  height: 200px;
+  perspective: 1000px; /* Affects 3D depth perception */
+  pointer-events: none; /* Don't block interactions */
+  /* Initial transform for centering, bounce animation will override translate part */
+  transform: translateX(-50%) translateY(-50%); 
+  animation: bounce-around-scene 40s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+}
+
+@keyframes bounce-around-scene {
+  /* --- Reaction: Explode and Reform --- */
+  0% {
+    transform: translateX(-50%) translateY(-50%) scale(0.1) rotateZ(0deg);
+    opacity: 0.3;
+  }
+  4% { /* Explode: Rapidly expand and fade slightly */
+    transform: translateX(-50%) translateY(-50%) scale(2.8) rotateZ(45deg);
+    opacity: 0.5;
+  }
+  10% { /* Reform: Shrink back to normal size and move to first bounce point, become solid */
+    transform: translateX(-50vw) translateY(-40vh) scale(1) rotateZ(10deg);
+    opacity: 1;
+  }
+
+  /* --- Continuous Slower Bouncing Loop (10% to 100%) --- */
+  30% { /* Was 25% */
+    transform: translateX(40vw) translateY(-30vh) scale(1) rotateZ(-5deg);
+  }
+  55% { /* Was 50% */
+    transform: translateX(30vw) translateY(40vh) scale(1) rotateZ(15deg);
+  }
+  80% { /* Was 75% */
+    transform: translateX(-45vw) translateY(35vh) scale(1) rotateZ(-10deg);
+  }
+  100% { /* Loop back to the first main bounce point for smooth continuation */
+    transform: translateX(-50vw) translateY(-40vh) scale(1) rotateZ(10deg);
+  }
+}
+
+.hypercube-container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transform-style: preserve-3d;
+  transform: translateZ(-100px) rotateX(0deg) rotateY(0deg); /* Initial position and rotation */
+  animation: rotate-hypercube 20s linear infinite;
+}
+
+@keyframes rotate-hypercube {
+  0% {
+    transform: translateZ(-100px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+  100% {
+    transform: translateZ(-100px) rotateX(360deg) rotateY(720deg) rotateZ(360deg);
+  }
+}
+
+.cube {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+
+.cube.outer-cube {
+  /* Outer cube is larger */
+}
+
+.cube.inner-cube {
+  transform: scale(0.5); /* Inner cube is smaller and can have a different rotation */
+  animation: rotate-inner-cube 15s linear infinite reverse; /* Rotate differently */
+}
+
+@keyframes rotate-inner-cube {
+  0% {
+    transform: scale(0.5) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+  100% {
+    transform: scale(0.5) rotateX(-360deg) rotateY(360deg) rotateZ(-720deg);
+  }
+}
+
+.cube-face {
+  position: absolute;
+  width: 200px; /* Match .hypercube-scene size */
+  height: 200px;
+  border: 2px solid rgba(255, 255, 255, 0.7); /* Translucent white wireframe */
+  background-color: rgba(255, 255, 255, 0.05); /* Very subtle fill */
+  opacity: 0.8;
+  box-sizing: border-box;
+}
+
+/* Positioning the faces of a cube */
+/* Front */
+.cube-face.front  { transform: translateZ(100px); }
+/* Back */
+.cube-face.back   { transform: rotateY(180deg) translateZ(100px); }
+/* Right */
+.cube-face.right  { transform: rotateY(90deg) translateZ(100px); }
+/* Left */
+.cube-face.left   { transform: rotateY(-90deg) translateZ(100px); }
+/* Top */
+.cube-face.top    { transform: rotateX(90deg) translateZ(100px); }
+/* Bottom */
+.cube-face.bottom { transform: rotateX(-90deg) translateZ(100px); }
+
+/* Connecting lines (edges) for the tesseract illusion */
+/* This is the trickiest part with pure CSS and often simplified or omitted */
+/* For a true tesseract, you'd have lines connecting vertices of the inner and outer cubes. */
+/* We can simulate some of these with additional thin divs, or pseudo-elements if structure allows. */
+/* Given the complexity and limitations, for now, we'll focus on the two rotating cubes. */
