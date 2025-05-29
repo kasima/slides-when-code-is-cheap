@@ -90,7 +90,14 @@ const Typewriter: React.FC<TypewriterProps> = ({ text, speed = 50, className = "
 };
 // --- End Typewriter Component ---
 
-const slides = [
+type Slide = {
+  title: string;
+  content: string[] | React.ReactNode;
+  contentClasses?: string[];
+  itemClasses?: string[];
+};
+
+const slides: Slide[] = [
   {
     title: "When an LoC is Cheap",
     content: [
@@ -228,7 +235,7 @@ export default function Slides() {
   const renderSlideContent = () => {
     const content = currentSlide.content;
     const contentClasses = currentSlide.contentClasses;
-    const itemClasses = currentSlide.itemClasses || [];
+    const itemClasses = (currentSlide.itemClasses || []) as string[];
 
     if (typeof content === 'string') {
       return (
@@ -238,7 +245,13 @@ export default function Slides() {
       );
     } else if (Array.isArray(content)) {
       const texts = content;
-      const isList = typeof contentClasses === 'string' && contentClasses.includes('list-disc');
+      const classesArray =
+        typeof contentClasses === 'string'
+          ? [contentClasses]
+          : Array.isArray(contentClasses)
+            ? contentClasses
+            : [];
+      const isList = classesArray.includes('list-disc');
       
       const WrapperElement = isList ? 'ul' : motion.div;
       const ItemElement = isList ? 'li' : 'p';
