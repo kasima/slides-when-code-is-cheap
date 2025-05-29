@@ -117,9 +117,9 @@ const slides: Slide[] = [
     title: "I Was Wrong.",
     content: (
       <div className="flex gap-8 items-center">
-        <div className="w-[300px] relative h-[436px] rounded-lg overflow-hidden glass-effect">
+        <div className="w-[300px] relative h-[397px] rounded-lg overflow-hidden glass-effect">
           <Image 
-            src="/images/ktgh.jpeg" 
+            src="/images/ktgh2.jpg" 
             alt="Don't be this guy in 2015" 
             fill
             className="object-contain"
