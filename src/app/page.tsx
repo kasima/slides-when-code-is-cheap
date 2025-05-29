@@ -158,11 +158,9 @@ const slides = [
 
 export default function Slides() {
   const [index, setIndex] = useState(0);
-  const [currentTypingLineIndex, setCurrentTypingLineIndex] = useState(0);
 
   const goTo = useCallback((i: number) => {
     setIndex(i);
-    setCurrentTypingLineIndex(0);
   }, []);
 
   useEffect(() => {
@@ -179,12 +177,6 @@ export default function Slides() {
 
   const currentSlide = slides[index];
 
-  const handleLineFinished = (totalLines: number) => {
-    if (currentTypingLineIndex < totalLines - 1) {
-      setCurrentTypingLineIndex(prev => prev + 1);
-    }
-  };
-
   const renderSlideContent = () => {
     const content = currentSlide.content;
     const contentClasses = currentSlide.contentClasses;
@@ -192,14 +184,9 @@ export default function Slides() {
 
     if (typeof content === 'string') {
       return (
-        <Typewriter 
-          key={`${index}-single-string`}
-          text={content}
-          speed={50} 
-          onFinished={() => handleLineFinished(1)}
-          className={typeof contentClasses === 'string' ? contentClasses : ""}
-          startSignal={true}
-        />
+        <p className={typeof contentClasses === 'string' ? contentClasses : ""}>
+          {content}
+        </p>
       );
     } else if (Array.isArray(content)) {
       const texts = content;
@@ -212,30 +199,11 @@ export default function Slides() {
         <WrapperElement className={isList && typeof contentClasses === 'string' ? contentClasses : undefined}>
           {texts.map((text, idx) => {
             const lineKey = `${index}-${idx}`;
-            let lineClassName = isList ? (itemClasses[idx] || "text-[var(--text-primary)]") : (Array.isArray(contentClasses) ? contentClasses[idx] : "");
-
-            // Determine visibility class based on currentTypingLineIndex
-            if (idx < currentTypingLineIndex) {
-              lineClassName += " line-visible";
-            } else if (idx === currentTypingLineIndex) {
-              lineClassName += " line-typing";
-            } else {
-              lineClassName += " line-hidden";
-            }
+            const lineClassName = isList ? (itemClasses[idx] || "text-[var(--text-primary)]") : (Array.isArray(contentClasses) ? contentClasses[idx] : "");
 
             return (
               <ItemElement key={lineKey} className={lineClassName}>
-                {idx === currentTypingLineIndex ? (
-                  <Typewriter
-                    key={`tw-${lineKey}`}
-                    text={text}
-                    speed={50}
-                    onFinished={() => handleLineFinished(texts.length)}
-                    startSignal={true}
-                  />
-                ) : (
-                  text
-                )}
+                {text}
               </ItemElement>
             );
           })}
@@ -312,7 +280,12 @@ export default function Slides() {
               transition={{ delay: 0.1 }}
               className="text-4xl md:text-5xl font-bold mb-8 text-[var(--text-primary)] drop-shadow-md"
             >
-              {currentSlide.title}
+              <Typewriter
+                text={currentSlide.title}
+                speed={20}
+                className="inline"
+                startSignal={true}
+              />
             </motion.h1>
             <div className="slide-content-prose min-h-[150px]">
               {renderSlideContent()}

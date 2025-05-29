@@ -314,25 +314,42 @@ body {
 
 /* --- New Typing Animation --- */
 .js-typewriter-output {
-  display: inline-block;
-  overflow: hidden;
-  white-space: pre-wrap;
-  /* The border provides the cursor effect during typing */
-  border-right: .15em solid var(--text-primary);
-  /* Animation for the border (cursor blink) */
-  animation: blink-caret .75s step-end infinite;
-  /* Opacity and animation-delay are handled by the component or slide transitions generally */
+  position: relative;
+  display: inline;
 }
 
-.js-typewriter-output.no-typing-border {
-  border-right-color: transparent; /* Hide border when typing is done */
-  animation: none; /* Stop blinking animation */
+.js-typewriter-output::after {
+  content: '';
+  position: absolute;
+  right: -8px;
+  top: 0;
+  height: 1em;
+  width: 0.15em;
+  background-color: var(--text-primary);
+  animation: blink-caret 1.5s step-end infinite;
+  vertical-align: text-bottom;
 }
 
-/* Cursor blinking - still used by .js-typewriter-output */
 @keyframes blink-caret {
-  from, to { border-color: transparent; }
-  50% { border-color: var(--text-primary); }
+  from, to { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+/* Remove old typing animation styles */
+.typing-text {
+  display: inline;
+}
+
+/* Remove old cursor styles */
+.typing-cursor {
+  display: none;
+}
+
+/* Remove old line visibility classes */
+.line-visible,
+.line-typing,
+.line-hidden {
+  opacity: 1;
 }
 
 /* Styling for the container of the text to be typed */
