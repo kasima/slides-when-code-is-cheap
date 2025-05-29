@@ -146,7 +146,7 @@ const slides: Slide[] = [
         <div className="flex-1">
           <ul className="list-disc pl-6 space-y-3">
             <li className="text-[var(--text-primary)]">The cost of a line of code is approaching $0.</li>
-            <li className="text-[var(--text-primary)]">Big Tech are caches of expensive, shared code.</li>
+            <li className="text-[var(--text-primary)]">Code required capital. Big Tech are caches of expensive, shared code.</li>
             <li className="text-[var(--text-primary)]">Analogy: What happened to radio?</li>
           </ul>
         </div>
@@ -160,8 +160,8 @@ const slides: Slide[] = [
         <div className="flex-1">
           <ul className="list-disc pl-6 space-y-3">
             <li className="text-[var(--text-primary)]">Teams don&apos;t need to be huge anymore.</li>
-            <li className="text-[var(--text-primary)]">Competitive advantage shifts from capital to clarity, values, vision.</li>
             <li className="text-[var(--text-primary)]">There&apos;s about to be a lot of disruption. New abstractions, new ways of working, new everything.</li>
+            <li className="text-[var(--text-primary)]">Competitive advantage shifts from capital to clarity, values, vision.</li>
             <li className="text-[var(--text-primary)] font-semibold text-[var(--accent)]">Code is cheap. Insight is rare.</li>
           </ul>
         </div>
@@ -180,7 +180,7 @@ const slides: Slide[] = [
     title: "What Still Matters",
     content: (
       <ul className="list-disc pl-6 space-y-4">
-        <li className="text-[var(--text-primary)]"><b className="text-[var(--primary)] dark:text-[var(--accent)]">Critical Thinking:</b> AI output doesn&apos;t make senese a lot of the time.</li>
+        <li className="text-[var(--text-primary)]"><b className="text-[var(--primary)] dark:text-[var(--accent)]">Critical Thinking:</b> AI output is happily nonsensical a lot of the time.</li>
         <li className="text-[var(--text-primary)]"><b className="text-[var(--primary)] dark:text-[var(--accent)]">Empathy:</b> Understanding real user needs, not just requirements.</li>
         <li className="text-[var(--text-primary)]"><b className="text-[var(--primary)] dark:text-[var(--accent)]">Creativity:</b> How to solve problems will require more than prompts.</li>
         <li className="text-[var(--text-primary)]"><b className="text-[var(--primary)] dark:text-[var(--accent)]">Taste:</b> The ability to recognize quality, simplicity, and what feels &lsquo;right.&rsquo;</li>
