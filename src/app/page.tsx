@@ -1,6 +1,7 @@
 "use client";
 import { useState, useCallback, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 // --- New Typewriter Component ---
 interface TypewriterProps {
@@ -110,10 +111,11 @@ const slides = [
     content: (
       <div className="flex gap-8 items-center">
         <div className="w-[300px] relative h-[436px] rounded-lg overflow-hidden glass-effect">
-          <img 
+          <Image 
             src="/images/ktgh.jpeg" 
             alt="Don't be this guy in 2015" 
-            className="w-full h-full object-contain"
+            fill
+            className="object-contain"
           />
         </div>
         <div className="flex-1 text-xl text-[var(--text-primary)] font-semibold">
@@ -145,10 +147,10 @@ const slides = [
     title: "What Still Matters",
     content: (
       <ul className="list-disc pl-6 space-y-4">
-        <li className="text-[var(--text-primary)]"><b className="text-[var(--primary)] dark:text-[var(--accent)]">Empathy:</b> Understanding real user needs, not just requirements.<br/><span className="text-[var(--text-secondary)] dark:text-[var(--text-light)] italic text-sm">&quot;You can ask an LLM to write 100 features. Only humans know which ones matter.&quot;</span></li>
-        <li className="text-[var(--text-primary)]"><b className="text-[var(--primary)] dark:text-[var(--accent)]">Purpose &amp; Values:</b> What you build &mdash; and why &mdash; matters more than how fast you can build it.</li>
-        <li className="text-[var(--text-primary)]"><b className="text-[var(--primary)] dark:text-[var(--accent)]">Creativity:</b> The next big idea won&apos;t be a prompt. It&apos;ll be a perspective shift.</li>
-        <li className="text-[var(--text-primary)]"><b className="text-[var(--primary)] dark:text-[var(--accent)]">Taste:</b> The ability to recognize quality, simplicity, and what feels &lsquo;right.&rsquo; <br/><span className="text-[var(--text-secondary)] dark:text-[var(--text-light)] italic text-sm">&quot;AI can generate a design. It takes taste to reject the first draft.&quot;</span></li>
+        <li className="text-[var(--text-primary)]"><b className="text-[var(--primary)] dark:text-[var(--accent)]">Empathy:</b> Understanding real user needs, not just requirements.</li>
+        <li className="text-[var(--text-primary)]"><b className="text-[var(--primary)] dark:text-[var(--accent)]">Purpose &amp; Values:</b> What you build &mdash; and why &mdash; matters more than ever.</li>
+        <li className="text-[var(--text-primary)]"><b className="text-[var(--primary)] dark:text-[var(--accent)]">Creativity:</b> How to solve problems will require insight.</li>
+        <li className="text-[var(--text-primary)]"><b className="text-[var(--primary)] dark:text-[var(--accent)]">Taste:</b> The ability to recognize quality, simplicity, and what feels &lsquo;right.&rsquo;</li>
       </ul>
     ),
   },
