@@ -305,3 +305,61 @@ body {
 /* For a true tesseract, you'd have lines connecting vertices of the inner and outer cubes. */
 /* We can simulate some of these with additional thin divs, or pseudo-elements if structure allows. */
 /* Given the complexity and limitations, for now, we'll focus on the two rotating cubes. */
+
+/* --- Sequential Text Animation & Cursor Styles --- */
+/* REMOVE OLD type-in-block and related stagger */
+/* @keyframes type-in-block { ... } */
+/* .slide-content-prose > * { ... } */
+/* .slide-content-prose > *:nth-child(n) { ... } */
+
+/* --- New Typing Animation --- */
+.js-typewriter-output {
+  display: inline-block;
+  overflow: hidden;
+  white-space: pre-wrap;
+  /* The border provides the cursor effect during typing */
+  border-right: .15em solid var(--text-primary);
+  /* Animation for the border (cursor blink) */
+  animation: blink-caret .75s step-end infinite;
+  /* Opacity and animation-delay are handled by the component or slide transitions generally */
+}
+
+.js-typewriter-output.no-typing-border {
+  border-right-color: transparent; /* Hide border when typing is done */
+  animation: none; /* Stop blinking animation */
+}
+
+/* Cursor blinking - still used by .js-typewriter-output */
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: var(--text-primary); }
+}
+
+/* Styling for the container of the text to be typed */
+.slide-content-prose {
+  /* Ensure there's enough space for text to appear */
+}
+
+/* Individual elements within prose will be handled by JS if complex,
+   or directly if it's a single string. */
+
+/* --- New Sequential Line Visibility Classes --- */
+.line-visible {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.3s ease; /* Optional: Fade in completed lines */
+}
+
+.line-typing {
+  visibility: visible;
+  opacity: 1;
+}
+
+.line-hidden {
+  visibility: hidden;
+  /* Keep opacity 0 to prevent interaction */
+  opacity: 0;
+  /* Ensure it takes up space */
+  height: 1.2em; /* Approximate line height */
+  display: block; /* Or inline-block depending on context */
+}

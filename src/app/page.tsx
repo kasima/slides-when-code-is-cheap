@@ -1,50 +1,127 @@
 "use client";
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+
+// --- New Typewriter Component ---
+interface TypewriterProps {
+  text: string;
+  speed?: number;
+  className?: string;
+  onFinished?: () => void;
+  startSignal?: boolean;
+}
+
+const Typewriter: React.FC<TypewriterProps> = ({ text, speed = 50, className = "", onFinished, startSignal = true }) => {
+  const [displayedText, setDisplayedText] = useState("");
+  const [isActuallyFinished, setIsActuallyFinished] = useState(false);
+
+  const charIndex = useRef(0);
+  const animationFrameId = useRef<number | null>(null);
+  const lastUpdateTime = useRef(0);
+
+  useEffect(() => {
+    charIndex.current = 0;
+    setDisplayedText("");
+    setIsActuallyFinished(false);
+    lastUpdateTime.current = 0;
+
+    if (!startSignal || !text) {
+        if (text === "") {
+            setIsActuallyFinished(true);
+            if (onFinished) onFinished();
+        }
+        return;
+    }
+
+    const typeAnimation = (timestamp: number) => {
+      if (charIndex.current >= text.length) {
+        if (!isActuallyFinished) {
+          setDisplayedText(text);
+          setIsActuallyFinished(true);
+          if (onFinished) onFinished();
+        }
+        return;
+      }
+
+      if (!lastUpdateTime.current) {
+        lastUpdateTime.current = timestamp;
+        animationFrameId.current = requestAnimationFrame(typeAnimation);
+        return;
+      }
+      const deltaTime = timestamp - lastUpdateTime.current;
+      const charsToAdvance = (deltaTime / 1000) * speed;
+      const newCharIndexExact = charIndex.current + charsToAdvance;
+      const newCharsToShowCount = Math.floor(newCharIndexExact);
+
+      if (newCharsToShowCount > displayedText.length && newCharsToShowCount <= text.length) {
+        setDisplayedText(text.substring(0, newCharsToShowCount));
+      }
+      
+      charIndex.current = newCharIndexExact;
+      lastUpdateTime.current = timestamp;
+
+      if (newCharIndexExact < text.length) {
+        animationFrameId.current = requestAnimationFrame(typeAnimation);
+      } else {
+        if (!isActuallyFinished) {
+            setDisplayedText(text);
+            setIsActuallyFinished(true);
+            if (onFinished) onFinished();
+        }
+      }
+    };
+
+    animationFrameId.current = requestAnimationFrame(typeAnimation);
+
+    return () => {
+      if (animationFrameId.current) cancelAnimationFrame(animationFrameId.current);
+    };
+  }, [text, speed, onFinished, startSignal]);
+
+  return (
+    <span
+      key={text + startSignal}
+      className={`${className} js-typewriter-output ${isActuallyFinished ? 'no-typing-border' : ''}`}
+    >
+      {displayedText}
+    </span>
+  );
+};
+// --- End Typewriter Component ---
 
 const slides = [
   {
     title: "When Code Is Cheap: What Still Matters in Software",
-    content: (
-      <>
-        <motion.p 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="text-3xl md:text-4xl font-bold mt-8 text-[var(--text-primary)] drop-shadow-lg"
-        >
-          What happens when code is no longer the bottleneck?
-        </motion.p>
-        <motion.p 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
-          className="mt-6 text-xl text-[var(--text-secondary)] opacity-90 drop-shadow"
-        >
-          Kasima Tharnpipitchai
-        </motion.p>
-      </>
-    ),
+    content: [
+      "What happens when code is no longer the bottleneck?",
+      "Kasima Tharnpipitchai"
+    ],
+    contentClasses: [
+      "text-3xl md:text-4xl font-bold mt-8 text-[var(--text-primary)] drop-shadow-lg",
+      "mt-6 text-xl text-[var(--text-secondary)] opacity-90 drop-shadow"
+    ]
   },
   {
-    title: "Hook / Opening",
-    content: (
-      <>
-        <p className="text-xl text-[var(--text-primary)] font-semibold">Anecdote:</p>
-        <p className="mt-4 text-[var(--text-secondary)]">Tell the GitHub story — the moment you realized Copilot wasn&apos;t just autocomplete.</p>
-        <p className="mt-4 text-[var(--text-secondary)]">Establish the before and after: from code being expensive to code becoming cheap.</p>
-      </>
-    ),
+    title: "I Was Wrong.",
+    content: [
+        "Anecdote:",
+        "Tell the GitHub story — the moment you realized Copilot wasn&apos;t just autocomplete.",
+        "Establish the before and after: from code being expensive to code becoming cheap."
+    ],
+    contentClasses: [
+        "text-xl text-[var(--text-primary)] font-semibold",
+        "mt-4 text-[var(--text-secondary)]",
+        "mt-4 text-[var(--text-secondary)]"
+    ]
   },
   {
     title: "The Shift: AI and the Cheapening of Code",
-    content: (
-      <ul className="list-disc pl-6 space-y-3">
-        <li className="text-[var(--text-primary)]">The cost of software production is falling due to AI.</li>
-        <li className="text-[var(--text-primary)]">Code is becoming commoditized &mdash; like music, photography, video editing.</li>
-        <li className="text-[var(--text-primary)]">Analogy: What happened to Blockbuster, record labels, ad agencies?</li>
-      </ul>
-    ),
+    content: [
+      "The cost of software production is falling due to AI.",
+      "Code is becoming commoditized — like music, photography, video editing.",
+      "Analogy: What happened to Blockbuster, record labels, ad agencies?"
+    ],
+    contentClasses: "list-disc pl-6 space-y-3"
   },
   {
     title: "What Still Matters: The Human Stack",
@@ -60,31 +137,32 @@ const slides = [
   },
   {
     title: "Implications for Builders & Teams",
-    content: (
-      <ul className="list-disc pl-6 space-y-3">
-        <li className="text-[var(--text-primary)]">Teams don&apos;t need to be huge anymore.</li>
-        <li className="text-[var(--text-primary)]">Competitive advantage shifts from capital and headcount → to clarity, values, vision.</li>
-        <li className="text-[var(--text-primary)] font-semibold text-[var(--accent)]">Code is cheap. Insight is rare.</li>
-      </ul>
-    ),
+    content: [
+      "Teams don&apos;t need to be huge anymore.",
+      "Competitive advantage shifts from capital and headcount → to clarity, values, vision.",
+      "Code is cheap. Insight is rare."
+    ],
+    contentClasses: "list-disc pl-6 space-y-3",
+    itemClasses: ["text-[var(--text-primary)]", "text-[var(--text-primary)]", "text-[var(--text-primary)] font-semibold text-[var(--accent)]"]
   },
   {
     title: "Closing: A Call to Build Wisely",
-    content: (
-      <>
-        <p className="text-[var(--text-primary)] text-lg">Software is no longer limited by ability — only by intention.</p>
-        <p className="mt-4 text-[var(--text-primary)] text-lg">In a world where anyone can build anything, what you choose to build says everything.</p>
-        <p className="mt-8 font-bold text-3xl text-[var(--primary)] dark:text-[var(--accent)] drop-shadow-md">&ldquo;What will you build, now that the only limit is your humanity?&rdquo;</p>
-      </>
-    ),
+    content: [
+      "Software is no longer limited by ability — only by intention.",
+      "In a world where anyone can build anything, what you choose to build says everything.",
+      "“What will you build, now that the only limit is your humanity?”"
+    ],
+    contentClasses: ["text-[var(--text-primary)] text-lg", "mt-4 text-[var(--text-primary)] text-lg", "mt-8 font-bold text-3xl text-[var(--primary)] dark:text-[var(--accent)] drop-shadow-md"]
   },
 ];
 
 export default function Slides() {
   const [index, setIndex] = useState(0);
+  const [currentTypingLineIndex, setCurrentTypingLineIndex] = useState(0);
 
   const goTo = useCallback((i: number) => {
     setIndex(i);
+    setCurrentTypingLineIndex(0);
   }, []);
 
   useEffect(() => {
@@ -98,6 +176,75 @@ export default function Slides() {
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [index, goTo]);
+
+  const currentSlide = slides[index];
+
+  const handleLineFinished = (totalLines: number) => {
+    if (currentTypingLineIndex < totalLines - 1) {
+      setCurrentTypingLineIndex(prev => prev + 1);
+    }
+  };
+
+  const renderSlideContent = () => {
+    const content = currentSlide.content;
+    const contentClasses = currentSlide.contentClasses;
+    const itemClasses = currentSlide.itemClasses || [];
+
+    if (typeof content === 'string') {
+      return (
+        <Typewriter 
+          key={`${index}-single-string`}
+          text={content}
+          speed={50} 
+          onFinished={() => handleLineFinished(1)}
+          className={typeof contentClasses === 'string' ? contentClasses : ""}
+          startSignal={true}
+        />
+      );
+    } else if (Array.isArray(content)) {
+      const texts = content;
+      const isList = typeof contentClasses === 'string' && contentClasses.includes('list-disc');
+      
+      const WrapperElement = isList ? 'ul' : motion.div;
+      const ItemElement = isList ? 'li' : 'p';
+
+      return (
+        <WrapperElement className={isList && typeof contentClasses === 'string' ? contentClasses : undefined}>
+          {texts.map((text, idx) => {
+            const lineKey = `${index}-${idx}`;
+            let lineClassName = isList ? (itemClasses[idx] || "text-[var(--text-primary)]") : (Array.isArray(contentClasses) ? contentClasses[idx] : "");
+
+            // Determine visibility class based on currentTypingLineIndex
+            if (idx < currentTypingLineIndex) {
+              lineClassName += " line-visible";
+            } else if (idx === currentTypingLineIndex) {
+              lineClassName += " line-typing";
+            } else {
+              lineClassName += " line-hidden";
+            }
+
+            return (
+              <ItemElement key={lineKey} className={lineClassName}>
+                {idx === currentTypingLineIndex ? (
+                  <Typewriter
+                    key={`tw-${lineKey}`}
+                    text={text}
+                    speed={50}
+                    onFinished={() => handleLineFinished(texts.length)}
+                    startSignal={true}
+                  />
+                ) : (
+                  text
+                )}
+              </ItemElement>
+            );
+          })}
+        </WrapperElement>
+      );
+    } else {
+      return content;
+    }
+  };
 
   return (
     <div className="min-h-screen w-full gradient-bg relative overflow-hidden">
@@ -165,16 +312,11 @@ export default function Slides() {
               transition={{ delay: 0.1 }}
               className="text-4xl md:text-5xl font-bold mb-8 text-[var(--text-primary)] drop-shadow-md"
             >
-              {slides[index].title}
+              {currentSlide.title}
             </motion.h1>
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              className="text-xl text-[var(--text-secondary)] leading-relaxed drop-shadow"
-            >
-              {slides[index].content}
-            </motion.div>
+            <div className="slide-content-prose min-h-[150px]">
+              {renderSlideContent()}
+            </div>
           </motion.div>
         </AnimatePresence>
 
